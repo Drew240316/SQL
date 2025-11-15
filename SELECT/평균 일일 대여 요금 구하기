@@ -1,0 +1,7 @@
+select round(avg(DAILY_FEE), 0) as AVERAGE_FEE
+from car_rental_company_car
+where car_type = 'SUV'
+
+;
+
+-- 소수 첫 번째 자리에서 반올림 = 첫번째 자리가 안보인다는 뜻.
