@@ -1,0 +1,10 @@
+select a.TITLE , a.board_id, b.reply_id, b.WRITER_ID, b.contents, date_format(b.created_date, '%Y-%m-%d') as create_date
+from USED_GOODS_BOARD a
+join USED_GOODS_REPLY b on a.BOARD_ID = b.BOARD_ID
+where year(a.created_date)='2022' and month(a.created_date)='10'
+order by b.created_date asc, a.TITLE asc
+;
+
+-- 조건에 부합하는 중고거래 댓글 달기 - SELECT 문제
+-- select절에 date_format은 형식에 맞게 출력 
+-- 문제에서는 ~~테이블에서 2022년 10월에 작성된 이라고 함. 작성됬으니, 게시글이 작성된 날짜로 해야 함. 댓글 작성이 x
