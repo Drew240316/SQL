@@ -1,0 +1,7 @@
+select pt_name, pt_no, GEND_CD, age, ifnull(tlno,'NONE') as tlno
+from patient
+where gend_cd = 'W' and age <= 12
+order by age desc, pt_name asc ;
+
+
+-- 이하  열 <= 조건
