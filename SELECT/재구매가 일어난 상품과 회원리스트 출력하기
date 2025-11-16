@@ -1,0 +1,12 @@
+select user_id, product_id
+from online_sale
+group by user_id, product_id
+having count(user_id) >= 2
+order by user_id asc, product_id desc;
+
+
+-- 동일한 회원이 동일한 상품 = user_id가 1이면, product_id에서 1 ,1 , 2 , 3이 있을 경우 1이 2번 나와서 재구매 한 것으로 생각 할 수 있음(2개 이상)
+-- group by에 하나의 열(예를들어 user_id가 1이면)를 기준으로 묶어서, user_id가 1인 경우 product_id에 1,2,3이 모두 한 묶음으로 들어감
+-- group by에 두개의 열(user_id, product_id)을 기준으로 묶어서, user_id가 1인 경우 product_id에 1,2,3이 있으면 세 묶음으로 들어감
+-- 묶여있는 상태에서, user_id >= 2를 조회하면 user_id가 2 이상인 상품들이 모두 나옴
+-- count를 써야 몇 개인지 알 수 있음
