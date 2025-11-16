@@ -1,0 +1,11 @@
+-- member_id, member_name, gender, date_format(date_of_birth,'%Y-%m-%d') as date_of_birth  
+-- 생일이 3월인 여성 : month(date_of_birth) = '03'
+-- and gender = 'W'
+-- 이 때 전화번호가 null인 경우는 출력에서 제외 : tlno가 is not null 
+-- 회원 id를 기준으로 오름 차순으로 정렬해주세요 : order by memer_id asc;
+
+select member_id, member_name, gender, date_format(date_of_birth,'%Y-%m-%d') as date_of_birth  
+from member_profile
+where gender = 'W' and tlno is not null 
+and month(date_of_birth) = '03'
+order by member_id asc;
