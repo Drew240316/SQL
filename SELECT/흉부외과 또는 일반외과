@@ -1,0 +1,10 @@
+-- DR_NAME, DR_ID, LCNS_NO, HIRE_YMD
+-- 진료과가 흉부외과 "이거나 " : mcdp_cd = 'GS' OR
+-- 일반외과인  : mcdp_cd = 'CS'
+-- from DOCTOR
+-- HIRE_YMD DESC, DR_NAME ASC;
+
+select DR_NAME, DR_ID, mcdp_cd, DATE_FORMAT(HIRE_YMD, '%Y-%m-%d') as HIRE_YMD
+from doctor 
+where mcdp_cd = 'CS' or mcdp_cd = 'GS'
+order by HIRE_YMD DESC, DR_NAME ASC;
