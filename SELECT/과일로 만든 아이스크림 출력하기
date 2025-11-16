@@ -1,0 +1,9 @@
+-- 토탈 오더가 3000보다 높음  : 보다는 > 초과를 써야 함.
+-- 아이스크림 주 성분이 과일 b : ingredient_type이 fruit_based 가 되어야함.
+-- 출력은 맛 a
+-- 오더바이는 총주문량 내림차순 a
+
+select a.flavor 
+from FIRST_HALF a join icecream_info b on a.flavor = b.flavor
+where a.total_order > 3000 and b.INGREDIENT_TYPE = 'fruit_based'
+order by a.total_order desc;
