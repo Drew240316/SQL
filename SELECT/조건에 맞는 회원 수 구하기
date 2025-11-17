@@ -1,4 +1,4 @@
--- 1) year
+-- 1) year, between
 select count(age)
 from user_info
 where  year(joined) = '2021'
@@ -6,12 +6,13 @@ and age between 20 and 29;
 
 
 
--- 2) date_format
+
+-- 2) date_format , between
 
 SELECT COUNT(AGE) AS USERS
 FROM USER_INFO
-WHERE AGE BETWEEN 20 AND 29
-  AND DATE_FORMAT(JOINED,"%Y") = "2021";
+WHERE DATE_FORMAT(JOINED,"%Y") = "2021"
+  and AGE BETWEEN 20 AND 29;
   
   -- where절에 date_format은 이퀄 사용, select에는 사용할 필요 없음
   -- date_format은 문자를 날짜 형식으로 변환하는 목적,
@@ -19,9 +20,33 @@ WHERE AGE BETWEEN 20 AND 29
 
 
 
--- 3) like 
+
+-- 3) like, between  
 select count(age)
 from user_info
 where joined like '2021%'
-and age between 20 and 29;
+  and age between 20 and 29;
+
+
+
+
+
+-- 4)  between, between 
+select count(*) as users
+from user_info
+where joined between '2021-01-01' and  '2021-12-31'
+and age between 20 and 29
+;
+
+
+-- 5) left, between 
+select count(age) as users 
+from user_info
+where left(joined,4) = '2021'
+and age between 20 and 29
+
+
+-- count 부분은 전체도 상관 없고, 특정 컬럼도 괜찮다.
+
+
 
