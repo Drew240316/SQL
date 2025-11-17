@@ -1,3 +1,5 @@
+-- 1) 서브쿼리
+
 select product_id, product_name, product_cd, category, price
 from food_product
 where price = (
@@ -11,3 +13,14 @@ where price = (
 -- (아래 잘못된 쿼리)
     -- select product_id, product_name, product_cd, category, max(price) as price
     -- from food_product ;
+
+
+-- 2) order by + limit 
+
+select product_id, product_name, product_cd, category, price
+from food_product
+order by price desc
+limit 1
+
+;
+
