@@ -1,0 +1,14 @@
+
+
+-- 틀린 답
+  -- select id, fish_name, length 
+  -- from fish_info
+  -- where length in (
+      select length
+      from fish_info
+      order by length
+      limit 3) a
+  -- order by id  
+
+-- WHERE 안에서 쓰는 서브쿼리에는 alias(별칭)를 붙일 수 없음. from절 서브쿼리 가능
+-- where 안에 쓰는 limit in any all 불가. from절 서브쿼리 가능
