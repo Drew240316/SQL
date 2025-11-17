@@ -1,0 +1,27 @@
+-- 1) year
+select count(age)
+from user_info
+where  year(joined) = '2021'
+and age between 20 and 29;
+
+
+
+-- 2) date_format
+
+SELECT COUNT(AGE) AS USERS
+FROM USER_INFO
+WHERE AGE BETWEEN 20 AND 29
+  AND DATE_FORMAT(JOINED,"%Y") = "2021";
+  
+  -- where절에 date_format은 이퀄 사용, select에는 사용할 필요 없음
+  -- date_format은 문자를 날짜 형식으로 변환하는 목적,
+  -- year는 연도 추츌 목적 
+
+
+
+-- 3) like 
+select count(age)
+from user_info
+where joined like '2021%'
+and age between 20 and 29;
+
