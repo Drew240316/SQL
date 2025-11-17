@@ -1,0 +1,13 @@
+select product_id, product_name, product_cd, category, price
+from food_product
+where price = (
+    select max(price)
+    from food_product
+    )
+
+-- select절에서 사용되는 집계함수는 group by랑 같이 써야한다.
+-- 전체에서 가장 큰 값은 6500원이다. 그런데 product_id, product_name은 뭘 보여주지? 라고 이해 함.
+-- 그래서 select절 집계함수는 항상 group by랑 같이쓴다. 만약 group by를 안 쓸 경우, 집계함수를 쓸 경우 my sql은 실행 결과가 나오고 oracle postgre는 실행 결과가 안나옴.
+-- (아래 잘못된 쿼리)
+    -- select product_id, product_name, product_cd, category, max(price) as price
+    -- from food_product ;
