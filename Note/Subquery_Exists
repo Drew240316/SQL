@@ -1,0 +1,42 @@
+★ 서브쿼리에서 행이 1 개라도 존재하면 True , 존재하지 않으면 False
+  - 호환) 조건부집계(1 0)=1
+
+
+★ Exists 기본 구조
+  WHERE EXISTS (
+    SELECT 1
+    FROM 테이블
+    WHERE 조건
+  )
+
+
+★ NOT Exists 기본 구조
+  WHERE NOT EXISTS (
+    SELECT 1
+    FROM 테이블
+    WHERE 조건
+
+  & 여기서 SELECT 1은 관례일 뿐 실제 값은 중요하지 않고, 행이 존재하느냐만 본다.
+
+
+★ 작동 원리
+  SQL 엔진은 EXISTS안의 서브쿼리를 행이 하나라도 나오는 순간 바로 TRUE로 판단하고 중단한다.
+
+
+★ EXISTS vs IN vs JOIN
+
+1) EXISTS
+
+  존재 여부만 체크
+  상관 서브쿼리 강력
+  큰 테이블 비교 시 가장 빠름
+
+2) IN
+
+  리스트 또는 결과 집합에 포함 여부
+  서브쿼리 결과가 크면 느려질 수 있음
+
+3) JOIN
+
+  실질적으로 결합하려고 할 때 사용
+  단순 존재 여부 확인에는 오히려 과함
