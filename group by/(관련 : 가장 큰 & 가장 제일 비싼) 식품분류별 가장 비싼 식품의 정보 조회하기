@@ -1,3 +1,4 @@
+★ 패턴) 가장 큰 & 가장 제일 비싼
 
 1) subquery + rank() over 
 
@@ -12,6 +13,21 @@ where rk = 1
 order by max_price desc
 
 
+2) subquery + max 
+
+SELECT 
+    category,
+    price AS max_price,
+    product_name
+FROM food_product f
+WHERE 
+    category IN ('과자','국','김치','식용유')
+    AND price = (
+        SELECT MAX(price)
+        FROM food_product
+        WHERE category = f.category   -- ← 여기서 바깥 f.category랑 연결 (상관 서브쿼리)
+    )
+ORDER BY max_price DESC;
 
 -------- < 오답 > --------
 
