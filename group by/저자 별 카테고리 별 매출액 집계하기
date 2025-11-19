@@ -59,7 +59,7 @@ order by b.author_id desc, a.category desc
 
 이유? 그룹 기준 컬럼, 그룹기준 컬럼, 그룹기준 컬럼, 집계함수 컬럼을 꼭 쓰자
 
-★ 정답 ) 1 
+-> 정답  1 
 
 
 -----
@@ -72,7 +72,7 @@ group by b.author_id, b.author_name, a.category
 order by b.author_id asc, a.category desc
 ;
 
-이유 ? year과 month함수의 혼합 사
+이유 ? year과 month함수의 혼합 사 -> 정답 2
 
 
 
