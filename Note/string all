@@ -19,3 +19,9 @@ REPLACE('a-b-c', '-', '/') → 'a/b/c'
 
 양쪽 공백 제거
 TRIM('  hi  ') → 'hi'
+
+무엇이든 문자열로 변환
+CAST(값 AS CHAR)
+CAST(값 AS VARCHAR(10))
+CONVERT(값, CHAR)
+
