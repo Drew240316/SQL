@@ -1,0 +1,10 @@
+★ 컬럼 BETWEEN 값1 AND 값2 
+
+값
+
+ 1) 컬럼
+ 2) 문자
+ 3) 숫자
+ 4) 숫자로 된 날짜
+ 5) timestamp, datetime
+
