@@ -15,6 +15,10 @@ CONCAT('a', 'b') → 'ab'
 특정 문자열 포함 여부
 INSTR('banana', 'na') → 3 (첫 등장 위치)
 
+★ 문자를 잘라내서 가져오기
+SUBSTR(문자열, 시작위치, 길이)
+SUBSTRING(문자열, 시작위치, 길이)   -- SUBSTR과 동일
+
 문자열 바꾸기
 REPLACE('a-b-c', '-', '/') → 'a/b/c'
 
