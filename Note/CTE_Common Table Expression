@@ -1,8 +1,9 @@
--- CTE는 WITH 절로 임시 테이블을 만드는 문법이다.
+CTE는 WITH 절로 '가상의 결과셋'이다.
   -- with 절로 시작해서
   -- 괄호 안에 임시테이블을 만드는 select문을 작성하고
-  -- 그 임시 테이블을 이름으로 호출해서
-  -- 최종 select문에서 활용한다
+  -- 가상의 결과셋을 select 결과로 만들어서
+  -- 그걸 '테이블 처럼' = '메인쿼리의 from절'처럼 쓴다.
+
 
 
 
@@ -12,8 +13,7 @@
     from ..
     where ..
   )
-select *
-from cte_name
+select.................
 
 
 
@@ -29,8 +29,5 @@ b AS (
     from ..
     where ..
 )
-SELECT *
-FROM *
-join b on a.id = b.id ;
-
+SELECT...................
 
