@@ -1,7 +1,7 @@
-★ 패턴 ） 
+★ 패턴 ）날짜 패턴 추출하기
 
 
-1) group by + join 
+1) group by + join + like
 select b.author_id, b.author_name, a.category, sum(c.sales * a.price) as total_sales
 from book a join author b on a.author_id = b.author_id
 join book_sales c on c.book_id = a.book_id
@@ -19,6 +19,9 @@ and month(c.sales_date) = '01'
 group by b.author_id, b.author_name, a.category
 order by b.author_id asc, a.category desc
 ;
+
+
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ★ 오답 ) 
