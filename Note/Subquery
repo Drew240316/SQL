@@ -97,12 +97,12 @@ from orders;
 
 
  4) 다중열 서브쿼리 : from절가능
-SELECT *
-FROM (
-    SELECT dept, AVG(salary) AS avg_salary
-    FROM emp
-    GROUP BY dept
-) AS x;
+  SELECT *
+  FROM (
+      SELECT dept, AVG(salary) AS avg_salary
+      FROM emp
+      GROUP BY dept
+  ) AS x;
 
 
 
