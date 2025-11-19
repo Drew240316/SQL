@@ -1,0 +1,12 @@
+select count(user_id) as users
+from user_info
+where age is null
+;
+
+
+
+tip)
+
+count(*) 은 null 포함해서 개수 셈
+count(컬럼)은 null 제외하고 개수 셈
+테이블의 컬럼 중 null있는 곳 없는 곳이 있음을 생각하면, null이 있는 컬럼이라도 다른 컬럼에는 값이 있어서 해당 null의 개수를 세고 싶으면, 다른 컬럼의 컬럼명을 넣기
