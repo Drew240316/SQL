@@ -1,0 +1,33 @@
+그룹(파티션) 안에서 순위를 매기는 윈도우 함수
+동일 값이 있으면 동순위를 주고
+동순위 뒤의 순서는 한단계 건너뛴다.
+
+| 값   | RANK()                   |
+| --- | ------------------------ |
+| 100 | 1                        |
+| 90  | 2                        |
+| 90  | 2                        |
+| 80  | 4  ← 3이 없음 (동순위 2명이 있어서) |
+
+
+
+★ 문법
+
+RANK() OVER(
+  [PARTITION BY 컬럼]
+  ORDER BY 정렬기준
+)
+
+★ 예시
+파티션 별로 최대 가격 찾기
+
+SELECT CATEGORY, PRICE, PRODUCT_NAME
+FROM (
+    SELECT
+        CATEGORY,
+        PRICE,
+        PRODUCT_NAME,
+        RANK() OVER (PARTITION BY CATEGORY ORDER BY PRICE DESC) AS RK
+    FROM FOOD_PRODUCT
+) T
+WHERE RK = 1;
