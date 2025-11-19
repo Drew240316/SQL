@@ -1,0 +1,19 @@
+★ MAX(값)
+
+값
+
+  1) 숫자 : 최댓값
+  2) 날짜 : 최신날짜
+  3) 문자열 : 사전순서로 가장 뒤
+  4) NULL : 무시
+  5) GROUP BY : 그룹별 최댓값
+  6) 서브쿼리 : 특정 조건의 최댓값 비교
+  7) CASE WHEN : 크게 2가지 패턴
+   - 조건에 맞는 값만 골라서 MAX를 구하는 방식 : 남자직원 중 최고 연봉을 구해라
+     MAX(CASE WHEN gender = 'M' THEN Salary END) AS MAX_MALE_SALARY
+     FROM EMPLOYEES;
+   - 특정 값이 그룹내 최고 값인지 판단. (부서 내 최고 연봉자 표시)
+    CASE WHEN SALARY - (SELECT MAX(SALARY) FROM EMPLOYEES) 
+         THEN '최고연봉자'
+         ELSE '일반직원'
+    END AS REMARK
