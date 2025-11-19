@@ -12,9 +12,33 @@ and   month(start_date, '%m') = '2020-10'
 order by car_id desc' at line 4
 
 
-오류 난 이유는 YEAR(start_date, '%Y')처럼 포맷 문자열을 넣었기 때문이야.
+오류 난 이유는 YEAR(start_date, '%Y')처럼 포맷 문자열을 넣었기 때문
 MySQL의 YEAR()와 MONTH() 함수는 포맷 문자열을 받지 않는다.
-그냥 이렇게 써야 해:
+그냥 이렇게 써야 함:
 
 YEAR(start_date)
 MONTH(start_date)
+------------------------------------
+
+
+
+select car_id
+2
+from car_rental_company_car
+3
+where car_type like '%세단%'
+4
+and   YEAR(start_date) = '2022'
+5
+and   month(start_date) = '10'
+6
+order by car_id desc
+7
+;
+실행 결과
+SQL 실행 중 오류가 발생하였습니다.
+Unknown column 'start_date' in 'where clause'
+
+
+오류가 난 이유는 tart_date라는 컬럼 자체가 없음.
+
