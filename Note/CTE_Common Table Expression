@@ -4,6 +4,14 @@ CTE는 WITH 절로 '가상의 결과셋'이다.
   -- 가상의 결과셋을 select 결과로 만들어서
   -- 그걸 '테이블 처럼' = '메인쿼리의 from절'처럼 쓴다.
 
+with cte_name as (
+    select a.ingredient_type, b.total_order
+    from icecream_info a join first_half b on a.flavor = b.flavor
+) 
+select ingredient_type, sum(total_order) as total_order
+from cte_name
+group by ingredient_type
+order by total_order asc;
 
 
 
