@@ -1,0 +1,32 @@
+
+1) subquery + rank() over 
+
+select category, price as max_price, product_name
+from (
+  select category, product_name, price,
+         rank() over(partition by category order by price desc)as rk
+  from food_product
+  where category in ('과자','국','김치','식용유')
+) t
+where rk = 1
+order by max_price desc
+
+
+
+-------- < 오답 > --------
+
+
+select category, price as max_price, product_name
+from (
+select category, product_name, price, rank() over(partition by category order by price) rk
+from food_product
+where category in ('과자','국','김치','식용유')
+)t
+where rk = 1
+order by max_price desc
+
+
+이유 ? 윈도우 함수에서 order by에 desc /asc 쓰자. 
+
+
+
