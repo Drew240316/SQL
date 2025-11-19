@@ -1,3 +1,10 @@
+★ 패턴）조건 존재 여부 기반 상태 판별 패턴
+
+    존재 여부 판단
+    상태 라벨링
+    Boolean 형태의 판정 로직
+
+
 1) case when + 조건부 집계(true false) + group by 
 
 select car_id,
@@ -28,5 +35,3 @@ case
  from car_rental_company_rental_history h2
  order by car_id desc
  ;
-
-
