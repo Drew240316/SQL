@@ -7,3 +7,27 @@ where max(a.views)
 SQL 실행 중 오류가 발생하였습니다.
 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '/home/grep/src/,a.board_id)
 from used_goods_board a join used_goods_file b on a.' at line 1
+
+SQL 입장에서는
+/ : 나누기 연산자
+home : 컬럼 또는 함수 이름으로 보임 → 문법 오류
+
+
+
+Invalid use of group function
+집계함수가 잘못된 위치에 있을 때 발생
+- where절에 집계함수 사용 불가
+- haivng절 사용가능 
+
+★정답)
+select concat('/home/grep/src/',
+              a.board_id,
+              '/',
+              b.file_id,
+              b.FILE_NAME,
+              b.file_ext
+              ) 
+              as file_path
+from used_goods_board a join used_goods_file b on a.board_id = b.board_id
+where a.views = (select max(views) from used_goods_board )
+order by b.file_id desc
