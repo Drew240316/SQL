@@ -1,0 +1,9 @@
+★오답)
+
+select concat(/home/grep/src/,a.board_id)
+from used_goods_board a join used_goods_file b on a.board_id = b.board_id
+where max(a.views)
+
+SQL 실행 중 오류가 발생하였습니다.
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '/home/grep/src/,a.board_id)
+from used_goods_board a join used_goods_file b on a.' at line 1
