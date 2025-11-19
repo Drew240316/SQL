@@ -1,2 +1,63 @@
 ★ 패턴 ） 
 
+
+1) group by + join 
+select b.author_id, b.author_name, a.category, sum(c.sales * a.price) as total_sales
+from book a join author b on a.author_id = b.author_id
+join book_sales c on c.book_id = a.book_id
+where c.sales_date like '2022-01%'
+group by b.author_id, b.author_name, a.category
+order by b.author_id asc, a.category desc
+;
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+★ 오답 ) 
+select b.author_id, b.author_name, a.category, sum(c.sales * a.price) as total_sales
+from book a join author b on a.author_id = b.author_id
+join book_sales c on c.book_id = a.book_id
+group by a.category
+where c.sales_date like '2022%-01%' ▲
+order by b.author_id desc, a.category desc
+;
+
+SQL 실행 중 오류가 발생하였습니다.
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where c.sales_date like '2022%-01%'
+order by b.author_id desc, a.category desc' at line 5
+
+이유 ? where절을 group by보다 앞에
+
+★ 오답 ) 
+select b.author_id, b.author_name, a.category, sum(c.sales * a.price) as total_sales
+from book a join author b on a.author_id = b.author_id
+join book_sales c on c.book_id = a.book_id
+where c.sales_date like '2022%-01%'
+group by a.category
+order by b.author_id desc, a.category desc
+;
+
+이유? WHERE에서 연도·월 비교를 정확히 하고 싶으면?
+like '2022-01%'
+
+★ 오답 ) 
+select b.author_id, b.author_name, a.category, sum(c.sales * a.price) as total_sales
+from book a join author b on a.author_id = b.author_id
+join book_sales c on c.book_id = a.book_id
+where c.sales_date like '2022-01%'
+group by a.category
+order by b.author_id desc, a.category desc
+;
+
+이유? 그룹 기준 컬럼, 그룹기준 컬럼, 그룹기준 컬럼, 집계함수 컬럼을 꼭 쓰자
+
+★ 정답 )
+select b.author_id, b.author_name, a.category, sum(c.sales * a.price) as total_sales
+from book a join author b on a.author_id = b.author_id
+join book_sales c on c.book_id = a.book_id
+where c.sales_date like '2022-01%'
+group by b.author_id, b.author_name, a.category
+order by b.author_id asc, a.category desc
+;
+
+
