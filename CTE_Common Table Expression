@@ -1,0 +1,36 @@
+-- CTE는 WITH 절로 임시 테이블을 만드는 문법이다.
+  -- with 절로 시작해서
+  -- 괄호 안에 임시테이블을 만드는 select문을 작성하고
+  -- 그 임시 테이블을 이름으로 호출해서
+  -- 최종 select문에서 활용한다
+
+
+
+-- CTE 기본 형태
+  WITH cte_name AS (
+    select ..
+    from ..
+    where ..
+  )
+select *
+from cte_name
+
+
+
+
+-- CTE 여러개 사용
+ WITH a AS(
+    select ..
+    from ..
+    where ..
+) ,  
+b AS (
+    select ..
+    from ..
+    where ..
+)
+SELECT *
+FROM *
+join b on a.id = b.id ;
+
+
