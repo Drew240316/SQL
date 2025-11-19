@@ -8,8 +8,9 @@ UPPER('hello') → HELLO
 문자열 자르기
 SUBSTRING('abcdef', 2, 3) → 'bcd'
 
-문자열 합치기
+★ 문자열 합치기
 CONCAT('a', 'b') → 'ab'
+문자, 숫자, 날짜, 함수 결과, 컬럼+문자열+컬럼 복수로 가능
 
 특정 문자열 포함 여부
 INSTR('banana', 'na') → 3 (첫 등장 위치)
