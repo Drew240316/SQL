@@ -1,4 +1,4 @@
-1) case when + 조건부 집계(true false)
+1) case when + 조건부 집계(true false) + group by 
 
 select car_id,
 case 
@@ -11,4 +11,6 @@ group by car_id
 order by car_id desc
 ;
 
+
+2) distinct + case when + subquery_exists
 
