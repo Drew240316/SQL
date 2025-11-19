@@ -5,3 +5,16 @@ and   YEAR(start_date, '%Y') = '2022'
 and   month(start_date, '%m') = '10'
 order by car_id desc
 ;
+
+SQL 실행 중 오류가 발생하였습니다.
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', '%Y') = '2022'
+and   month(start_date, '%m') = '2020-10'
+order by car_id desc' at line 4
+
+
+오류 난 이유는 YEAR(start_date, '%Y')처럼 포맷 문자열을 넣었기 때문이야.
+MySQL의 YEAR()와 MONTH() 함수는 포맷 문자열을 받지 않는다.
+그냥 이렇게 써야 해:
+
+YEAR(start_date)
+MONTH(start_date)
