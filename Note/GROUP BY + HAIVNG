@@ -9,7 +9,7 @@ GROUP BY 그룹기준;
 
 
 -- 규칙)
-   -- SELECT에서 집계하지 않은 컬럼은 전부 GROUP BY에 들어가야한다. = 그룹 기준 컬럼 , 집계 함수 단 두가지. (그룹바이 없는 일반컬럼 불가)
+   -- SELECT에서 집계하지 않은 컬럼은 전부 GROUP BY에 들어가야한다. = ★ 그룹 기준 컬럼 ,★  집계 함수 단 두가지. (그룹바이 없는 일반컬럼 불가)
    -- SALSE 테이블이 있고 USER_ID, PRICE가 있다고 하자. 유저별 매출 총합을 구하려면?
    SELECT USER_ID, SUM(PRICE)
    FROM SALES
@@ -22,7 +22,6 @@ GROUP BY 그룹기준;
   GROUP BY USER_ID
   HAVING TOTAL_PRICE > 1000000;   -- 실행 순서는 HAIVNG보다 SELECT절이 늦게 실행되지만, MY SQL에서는 SELECT절의 ALIAS가 가능하다.
 
--- TIP)
-  -- WHERE절은 그룹바이 전, HAVING을 그룹바이 후 실행됨.
+-- TIP) WHERE절은 그룹바이 전, HAVING을 그룹바이 후 실행됨.
 
 
