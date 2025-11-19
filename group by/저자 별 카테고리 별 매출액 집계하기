@@ -51,13 +51,5 @@ order by b.author_id desc, a.category desc
 
 이유? 그룹 기준 컬럼, 그룹기준 컬럼, 그룹기준 컬럼, 집계함수 컬럼을 꼭 쓰자
 
-★ 정답 )
-select b.author_id, b.author_name, a.category, sum(c.sales * a.price) as total_sales
-from book a join author b on a.author_id = b.author_id
-join book_sales c on c.book_id = a.book_id
-where c.sales_date like '2022-01%'
-group by b.author_id, b.author_name, a.category
-order by b.author_id asc, a.category desc
-;
-
+★ 정답 ) 1 
 
