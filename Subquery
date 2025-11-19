@@ -1,0 +1,55 @@
+-- 쿼리 안에 들어가는 또 다른 쿼리
+
+
+----------- <서브쿼리가 들어가는 위치> -------------
+-- 특정 값을 다루기 위한 where절 서브쿼리 : 괄호 속 select가 조건용 데이터의 역할
+  select name, score
+  from student
+  where scrore > (select avg(scroe) from student);
+
+-- 테이블 처럼 다루기 위한 from절 서브 쿼리 : 괄호 속 select가 임시 테이블 역할
+  select month, total_sales
+  from (
+    select month(date), as month, sum(price) as total_sales
+    from sales
+    group by month(date)
+  ) as t;
+  
+-- select에서 단일 값(1행 1열)을 가져올 때 사용하는 select서브쿼리 : 모든 행에 똑같은 숫자가 붙음
+
+select 
+  order_id,
+  price,
+  (select count(*) from orders) as total_order_cnt
+from orders;
+
+
+
+
+
+
+------ < 서브쿼리의 종류 > --------------
+
+-- 1) 단일 행 서브쿼리 : select avg(score)
+  -- where에서 비교연산자 사용 가능
+-- 2) 다중 행 서브쿼리 : 반환 값 여러개 , in any all과 함께 쓰임 
+  select name
+  from student
+  where score in (select max(score) form student);
+
+-- 3) 다중 열 서브쿼리
+  where (col1, col2) in (select col1, col2 from..)
+
+-- 4) 상관 서브쿼리 : 바깥 쿼리의 값을 참조하는 형태
+  -- 서브쿼리 안에서 e.dept를 사용하고 있음, 이게 상관 서브쿼리 (그룹별 최댓값,최소값을 구하는데 자주 쓰임)
+
+  SELECT name, dept, salary
+  FROM emp e
+  WHERE salary > (
+    SELECT AVG(salary)
+    FROM emp
+    WHERE dept = e.dept
+  );
+
+
+
