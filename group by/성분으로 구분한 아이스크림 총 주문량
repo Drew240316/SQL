@@ -1,8 +1,19 @@
+★ 패턴 ) 직접 조인 후 결과를 낼 것인가? 중간 결과로 결과를 낼 것인가?
 
-1) join + gruop by 
+1) join + gruop by + sum 
 select b.ingredient_type, sum(a.total_order) as total_order
 from first_half a join icecream_info b on a.flavor = b.flavor
 group by b.ingredient_type
 order by total_order asc
 ;
 
+
+2) cte + group by + sum
+with cte_name as (
+    select a.ingredient_type, b.total_order
+    from icecream_info a join first_half b on a.flavor = b.flavor
+) 
+select ingredient_type, sum(total_order) as total_order
+from cte_name
+group by ingredient_type
+order by total_order asc;
