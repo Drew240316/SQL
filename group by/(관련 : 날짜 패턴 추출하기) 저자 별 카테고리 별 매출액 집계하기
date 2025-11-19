@@ -31,7 +31,15 @@ order by b.author_id asc, a.category desc
 ;
 
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4) gruop by + date_format
+select b.author_id, b.author_name, a.category, sum(c.sales * a.price) as total_sales
+from book a join author b on a.author_id = b.author_id
+join book_sales c on c.book_id = a.book_id
+where date_format(c.sales_date, '%Y-%m') = '2022-01'
+group by b.author_id, b.author_name, a.category
+order by b.author_id asc, a.category desc
+;
+--------------------------------------------------------------------<오답답>--------------------------------------------------------------------------------------------------
 
 ★ 오답 ) 
 select b.author_id, b.author_name, a.category, sum(c.sales * a.price) as total_sales
@@ -85,6 +93,21 @@ order by b.author_id asc, a.category desc
 ;
 
 이유 ? year과 month함수의 혼합 사 -> 정답 2
+
+
+★ 오답 ) 
+select b.author_id, b.author_name, a.category, sum(c.sales * a.price) as total_sales
+from book a join author b on a.author_id = b.author_id
+join book_sales c on c.book_id = a.book_id
+where date_format(c.sales_date, 'Y%-m%') = '2022-01'
+group by b.author_id, b.author_name, a.category
+order by b.author_id asc, a.category desc
+;
+
+
+이유 ? date_format함수는 %를 쓸 때 날짜 앞에 쓴다. -> 정답 4
+
+
 
 
 
