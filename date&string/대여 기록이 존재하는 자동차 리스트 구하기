@@ -42,3 +42,33 @@ Unknown column 'start_date' in 'where clause'
 
 오류가 난 이유는 tart_date라는 컬럼 자체가 없음.
 
+
+
+
+
+
+
+
+
+------------------------------------
+
+select a.car_id
+from car_rental_company_car a join CAR_RENTAL_COMPANY_RENTAL_HISTORY b on a.car_id = b.car_id
+where a.car_type like '%세단%'
+and   YEAR(b.START_DATE) = '2022'
+and   month(b.START_DATE) = '10'
+order by a.car_id desc
+;
+
+
+이유 ? 문제에서는 car_id가 중복이 없어야 된다고함.
+
+정답)
+select distinct a.car_id
+from car_rental_company_car a join CAR_RENTAL_COMPANY_RENTAL_HISTORY b on a.car_id = b.car_id
+where a.car_type like '%세단%'
+and   YEAR(b.START_DATE) = '2022'
+and   month(b.START_DATE) = '10'
+order by a.car_id desc
+;
+
