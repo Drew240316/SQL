@@ -1,0 +1,5 @@
+MY SQL가능 ORACLE 불가능
+날짜를 문자열 형태로 변환(출력 함수)
+
+SELECT DATE_FORMAT('2022-01-05', '%Y-%m');  -- '2022-01'
+SELECT DATE_FORMAT('2022-01-05', '%Y-%m-%d');  -- '2022-01-05'
