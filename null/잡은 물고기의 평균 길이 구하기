@@ -7,3 +7,18 @@ from cte_name
 
 
 실패 (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select id, ifnull(length, 10)\n    from fish_info\n) \nselect round(sum(length)/cou' at line 2")
+
+이유)
+IFNULL(length, 10)처럼 함수가 들어가면
+MySQL은 CTE 안에서 컬럼 이름을 자동으로 인식하지 못한다.
+그래서 다음처럼 명시적으로 적어줘야 함:
+    WITH cte_name (id, length) AS (...)
+
+
+정답)
+with cte_name as (
+    select id, ifnull(length, 10) as length
+    from fish_info
+) 
+select round(sum(length)/count(id),2) as average_length
+from cte_name
