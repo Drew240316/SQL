@@ -1,0 +1,7 @@
+select car_id
+from car_rental_company_car
+where car_type like '%세단%'
+and   YEAR(start_date, '%Y') = '2022'
+and   month(start_date, '%m') = '10'
+order by car_id desc
+;
