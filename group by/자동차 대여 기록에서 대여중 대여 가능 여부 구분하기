@@ -14,3 +14,19 @@ order by car_id desc
 
 2) distinct + case when + subquery_exists
 
+select distinct car_id,
+case 
+    when exists (
+        select 1
+        from car_rental_company_rental_history H1
+        where h1.car_id = h2.car_id
+        and '2022-10-16' between h1.start_date and h1.end_date
+    )
+    then '대여중'
+    else '대여 가능'
+  end as availability
+ from car_rental_company_rental_history h2
+ order by car_id desc
+ ;
+
+
