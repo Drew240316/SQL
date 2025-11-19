@@ -1,0 +1,9 @@
+with cte_name (
+    select id, ifnull(length, 10)
+    from fish_info
+) 
+select round(sum(length)/count(id),2) as average_length
+from cte_name
+
+
+실패 (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select id, ifnull(length, 10)\n    from fish_info\n) \nselect round(sum(length)/cou' at line 2")
