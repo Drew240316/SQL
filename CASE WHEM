@@ -9,7 +9,7 @@
 CASE
   WHEN 조건1 THEN 값1
   WHEN 조건2 THEN 값2
-  ELSE 기본값
+  ELSE 값
 END
 
 -- 점수가 90점 이상이면 A
