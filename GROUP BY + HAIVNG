@@ -1,0 +1,28 @@
+-- 같은 값끼리 묶어서 한 덩어리로 만드는 문법
+  -- 집계 함수 (AVG, SUM, COUNT, MAX, MIN)과 함께 쓰인다.
+  -- 특정 기준을 정하고, 기준이 같은 행들을 하나의 그룹으로 묶어서 그 그룹별로 합계를 구하거나 평균을 구함
+  -- 고객별 총 매출, 부서별 평균 연봉, 지역별 주문 건수, 물고기 종류별 최대 길이, 학생별 평균 성적
+
+SELECT 그룹기준, 집계함수
+FROM 테이블
+GROUP BY 그룹기준;
+
+
+-- 규칙)
+   -- SELECT에서 집계하지 않은 컬럼은 전부 GROUP BY에 들어가야한다. = 그룹 기준 컬럼 , 집계 함수 단 두가지. (그룹바이 없는 일반컬럼 불가)
+   -- SALSE 테이블이 있고 USER_ID, PRICE가 있다고 하자. 유저별 매출 총합을 구하려면?
+   SELECT USER_ID, SUM(PRICE)
+   FROM SALES
+   GROUP BY USER_ID;
+
+-- GROUP BY + HAVING :그룹한 뒤! 조건을 거는 문법.
+  -- 고객별 총 매출이 100만 넘는 고객을 보고싶다.
+  SELECT USEIR_ID, SUM(PRICE) AS TOTAL_PRICE
+  FROM SALES
+  GROUP BY USER_ID
+  HAVING TOTAL_PRICE > 1000000;   -- 실행 순서는 HAIVNG보다 SELECT절이 늦게 실행되지만, MY SQL에서는 SELECT절의 ALIAS가 가능하다.
+
+-- TIP)
+  -- WHERE절은 그룹바이 전, HAVING을 그룹바이 후 실행됨.
+
+
