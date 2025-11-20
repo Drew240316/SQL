@@ -1,16 +1,18 @@
-★ 오답)
-
-with cte_name as (
-    select car_id, date_format(start_date, '%Y-%m-%d') as start_date,
-    date_format(end_date, '%Y-%m-%d') as end_date
-    from car_rental_company_rental_history
-    group by car_id 
-)
 select car_id, round(avg(datediff(end_date,start_date)+1),1) as AVERAGE_DURATION
-from cte_name
-where datediff(end_date,start_date) + 1 >= 7
+from car_rental_company_rental_history
 group by car_id
-order by car_id desc, AVERAGE_DURATION desc
+having avg(datediff(end_date,start_date)+1) >= 7
+order by AVERAGE_DURATION desc, car_id desc
+
 ;
 
 
+
+tip)
+
+where과 having은 다르다.
+where은 행을 필터링하고,
+그 다음 group by로 그룹을 묶은 다음.
+묶은 그룹을 필터링하는 것이 having이다.
+having에서 함수를 사용하더라도, 실제 보여지는 select의 최종 결과값은 아니기에,
+함수를 사용하고 싶으면 select에 한번 더 써라.
