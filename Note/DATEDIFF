@@ -1,0 +1,13 @@
+DATEDIFF(date1, date2)
+
+  date1 - date2의 날짜 차이를 일(day) 단위로 반환
+
+  select datediff('2022-05-10-','2022-05-01') 
+  결과는 9
+
+
+  특징?
+  - 일(day) 단위만 지원 (시분초없음) -> 시분초 쓰고 싶으면 timestampdiff사용
+  - 순서가 중요 (앞 날짜가 더 크면 양수, 뒷 날짜가 더 크면 음수)
+  - null이 끼면 결과가 null로 나옴
+  
