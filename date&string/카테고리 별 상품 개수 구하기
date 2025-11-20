@@ -1,3 +1,5 @@
+★ 정답 1) cte + left + count 
+
 with cte_name as (
     select product_id, left(product_code,2) as test
     from product
@@ -8,3 +10,30 @@ group by test
 
 
 tip) cte명 옆에 as 꼭 빼먹지 말자!
+
+
+★ 정답 2) cte +  count 
+SELECT LEFT(product_code, 2) AS category,
+       COUNT(*) AS products
+FROM product
+GROUP BY LEFT(product_code, 2)
+ORDER BY category;
+
+
+★ 정답 3) substring
+SELECT SUBSTRING(product_code, 1, 2) AS category,
+       COUNT(*) AS products
+FROM product
+GROUP BY SUBSTRING(product_code, 1, 2)
+ORDER BY category;
+
+
+★ 정답 4) subquery 인라인뷰
+SELECT category, COUNT(*) AS products
+FROM (
+    SELECT LEFT(product_code, 2) AS category
+    FROM product
+) t
+GROUP BY category
+ORDER BY category;
+
