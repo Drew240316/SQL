@@ -13,7 +13,7 @@
      MAX(CASE WHEN gender = 'M' THEN Salary END) AS MAX_MALE_SALARY
      FROM EMPLOYEES;
    - 특정 값이 그룹내 최고 값인지 판단. (부서 내 최고 연봉자 표시)
-    CASE WHEN SALARY - (SELECT MAX(SALARY) FROM EMPLOYEES) 
+    CASE WHEN SALARY = (SELECT MAX(SALARY) FROM EMPLOYEES) 
          THEN '최고연봉자'
          ELSE '일반직원'
     END AS REMARK
