@@ -15,7 +15,7 @@ GROUP BY 그룹기준;
    FROM SALES
    GROUP BY USER_ID;
 
--- GROUP BY + HAVING :그룹한 뒤! 조건을 거는 문법.
+-- GROUP BY + HAVING :그룹한 뒤! 조건(필터링)을 거는 문법으로 필터링이기에 select처럼 결과값이 최종으로 반영되지 않음.
   -- 고객별 총 매출이 100만 넘는 고객을 보고싶다.
   SELECT USEIR_ID, SUM(PRICE) AS TOTAL_PRICE
   FROM SALES
