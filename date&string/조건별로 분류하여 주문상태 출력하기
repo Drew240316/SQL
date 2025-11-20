@@ -1,3 +1,5 @@
+★ 오답)
+
 select order_id, product_id, out_date,
     case 
         when OUT_DATE	 =< '2022-05-01' then '출고완료' 
@@ -22,3 +24,17 @@ MySQL에서는 비교 연산자는 <= (작거나 같다)이다. =<는 문법 오
 이유 3) NULL비교는 WHEN에서 처리한다.
   WHEN OUT_DATE IS NULL THEN '출고미정'
 
+추가) 문제의 예시는 out_date가 시간이 나오지 않는다. date_format을 써라.(아래)
+
+
+
+★ 정답)
+select order_id, product_id, date_format(out_date, '%Y-%m-%d') as out_date,
+    case 
+        when OUT_DATE	 <= '2022-05-01' then '출고완료' 
+        when OUT_DATE	 >  '2022-05-01' then '출고대기' 
+        when OUT_DATE is null then '출고미정'
+        end as '출고여부'
+from food_order
+order by order_id asc
+;
