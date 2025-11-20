@@ -1,0 +1,20 @@
+★ 오답)
+
+select year(ym) as 'year', round(avg(pm_val1),2) as 'PM10' ,
+      round(avg(pm_val2),2) as  'PM2.5'
+from AIR_POLLUTION
+where ym like '2018%' and location2 like '%수원%'
+group by year(ym)
+order by year asc
+
+
+★ 이유 ) 연도별 평균을 구해라 문제. 연도가 그룹바이에 들어가는 것이 맞지만 2018년도가 where절 들어갈 필요는 없음
+
+
+
+select year(ym) as 'year', round(avg(pm_val1),2) as 'PM10' ,
+      round(avg(pm_val2),2) as  'PM2.5'
+from AIR_POLLUTION
+where location2 like '%수원%'
+group by year(ym)
+order by year asc
