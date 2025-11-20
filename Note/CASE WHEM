@@ -11,7 +11,7 @@
   CASE
     WHEN 조건1 THEN 값1
     WHEN 조건2 THEN 값2
-    ELSE 값
+    ELSE 값 (생략 가능, else 뒤에는 조건을 못 씀)
   END  (end 뒤에 컬럼명을 쓰지만 생략 가능, 컬럼명 쓰려면 as 쓰고 씀)
 
 -- 예시
