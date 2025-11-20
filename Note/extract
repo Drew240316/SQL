@@ -1,6 +1,5 @@
 DATE에서 연/월/일을 추출하는 표준 SQL 패턴
 
-
 EXTRACT(YEAR  FROM sales_date) = '2022'
 EXTRACT(MONTH FROM sales_date) = '01'
 EXTRACT(day FROM sales_date) = '10'
