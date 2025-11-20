@@ -24,7 +24,24 @@
   CASE 구문은
   -- SELECT에서 새로운 컬럼을 만들 때   (문제 : 자동차 대여 기록중에서 대여중 대여 가능 여부 구하기)
   -- ORDER BY에서 조건으로 정렬할 때
-  -- WHERE에서 특정 조건을 동적으로 만들 때 등 사용.
+       ORDER BY 
+         CASE WHEN status = '대여중' THEN 0 ELSE 1 END,
+         start_date DESC;
+  -- WHERE에서 특정 조건을 동적으로(상관서브쿼리) 만들 때 등 사용
+        WHERE 
+          CASE 
+            WHEN a.type = 'VIP' THEN a.price 
+            ELSE a.discount_price
+          END > 10000
+
+       WHERE
+        a.price >
+          CASE 
+            WHEN a.category = 'A' THEN (SELECT AVG(price) FROM product p WHERE p.category = 'A')
+            ELSE (SELECT AVG(price) FROM product)
+          END
+
+
 
 -- tip) 
   조건부 집계 공식 자주 사용 (max, sum, count)를 적용하는 기법으로, 조건을 만족하는 값을 1개라도 있는지 찾음
