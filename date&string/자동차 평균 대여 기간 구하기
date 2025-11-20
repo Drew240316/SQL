@@ -1,0 +1,16 @@
+★ 오답)
+
+with cte_name as (
+    select car_id, date_format(start_date, '%Y-%m-%d') as start_date,
+    date_format(end_date, '%Y-%m-%d') as end_date
+    from car_rental_company_rental_history
+    group by car_id 
+)
+select car_id, round(avg(datediff(end_date,start_date)+1),1) as AVERAGE_DURATION
+from cte_name
+where datediff(end_date,start_date) + 1 >= 7
+group by car_id
+order by car_id desc, AVERAGE_DURATION desc
+;
+
+
