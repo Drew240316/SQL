@@ -17,7 +17,7 @@ You have an error in your SQL syntax; check the manual that corresponds to your 
 
 
 이유 1)
-MySQL에서는 비교 연산자는 <= (작거나 같다)이다. =<는 문법 오류 ㅂㄹ생
+MySQL에서는 비교 연산자는 <= (작거나 같다)이다. =<는 문법 오류 발생
 
 이유 2) CASE문에서 ELSE 뒤에 는 조건이 못 들어 간다.
 
