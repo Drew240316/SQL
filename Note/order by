@@ -1,0 +1,76 @@
+ORDER BY에는 결과를 정렬할 수 있는 “표현식(Expressions)”이면 뭐든지 들어올 수 있어.
+단순 컬럼뿐만 아니라 “계산식, 함수, CASE, 서브쿼리(일부 DB), 컬럼 번호”까지 가능해.
+
+아래에 가능한 모든 예시를 깔끔하게 정리해줄게.
+
+⭐ ORDER BY에 들어올 수 있는 모든 것 (완벽 정리)
+✔ 1) 단순 컬럼명
+ORDER BY age;
+ORDER BY name DESC;
+
+✔ 2) 여러 컬럼 조합
+ORDER BY deptno, sal DESC;
+
+✔ 3) 산술 연산(계산식)
+
+너가 말한 a + b도 여기 포함됨.
+
+ORDER BY price * quantity DESC;
+ORDER BY a + b;
+ORDER BY (salary - bonus) DESC;
+
+
+👉 ORDER BY는 계산식 100% 가능!
+
+✔ 4) 함수(Function)
+
+수학함수, 문자열함수, 날짜함수 뭐든 상관없음.
+
+ORDER BY LENGTH(name) DESC;
+ORDER BY ABS(salary - 5000);
+ORDER BY DATE_FORMAT(hire_date, '%Y');
+ORDER BY UPPER(name);
+
+✔ 5) CASE WHEN (조건 기반 정렬)
+
+실무에서 가장 많이 쓰는 패턴.
+
+ORDER BY
+    CASE 
+        WHEN status = '대여중' THEN 0
+        ELSE 1
+    END,
+    start_date DESC;
+
+
+👉 조건대로 “우선순위 정렬”하고 싶을 때 사용.
+
+✔ 6) 서브쿼리 결과(일부 DB 허용)
+
+MySQL에서는 SELECT에 없는 서브쿼리는 제한적이지만 가능할 때도 있음.
+
+ORDER BY (SELECT AVG(sal) FROM emp);
+
+
+(실무에서는 잘 안 씀)
+
+✔ 7) SELECT 결과 컬럼(별칭 alias)
+SELECT name, age*2 AS double_age
+FROM user
+ORDER BY double_age DESC;
+
+✔ 8) 컬럼 순번(1, 2, 3…)
+SELECT deptno, sal, hiredate
+FROM emp
+ORDER BY 2 DESC;   -- sal 기준 정렬
+
+
+→ 실무에서는 잘 안 쓰지만 코테에서는 자주 보임.
+
+⭐ 제일 많이 쓰는 패턴 3개
+
+ORDER BY 컬럼명
+
+ORDER BY CASE WHEN … THEN … END
+
+ORDER BY 계산식(예: price * qty)
