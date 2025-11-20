@@ -1,5 +1,7 @@
 REGEXP 'apple'
 'apple', 'Apple', 'APPLE' 모두 매칭됨.
+() 괄호 사용 안함 
+'' 작은따옴표 사용.
 
 
 LOWER('APPLE')
