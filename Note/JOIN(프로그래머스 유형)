@@ -1,0 +1,351 @@
+🚀 JOIN이란?
+
+👉 둘 이상의 테이블을 연결해서, 하나의 결과 테이블처럼 조회하는 것
+
+즉,
+
+테이블 A
+
+테이블 B
+
+이 두 테이블의 공통된 컬럼(키, PK-FK 등) 을 기준으로
+A와 B를 붙여서 하나의 결과를 만드는 것.
+
+🎯 JOIN의 기본 구조
+SELECT 컬럼들
+FROM A
+JOIN B
+ON A.키컬럼 = B.키컬럼;
+
+🔥 JOIN의 3대 핵심
+
+JOIN은 테이블을 합치는 것
+
+ON은 어떤 컬럼을 기준으로 붙일지 정하는 조건
+
+JOIN 결과는 SELECT와 GROUP BY, WHERE 등에 들어가는 하나의 큰 테이블이 됨
+
+🧱 JOIN의 종류 (SQLD/프로그래머스 기준 4개만 필수)
+1) INNER JOIN (가장 많이 씀)
+
+👉 두 테이블 모두 일치하는 데이터만 남김
+
+A           B
+(교집합만) → INNER JOIN
+
+
+예시:
+
+SELECT *
+FROM A
+INNER JOIN B
+ON A.id = B.id;
+
+결과:
+
+A와 B 모두에 존재하는 id만 조회
+
+→ 프로그래머스에서 80% 이상이 INNER JOIN으로 풀림
+
+2) LEFT JOIN (왼쪽 우선)
+
+👉 왼쪽 테이블은 모두 나오고,
+오른쪽에 매칭되는 데이터가 없으면 NULL로 채움.
+
+A (전체)
+B (일치하면 값 / 없으면 NULL)
+
+
+예시:
+
+SELECT *
+FROM A
+LEFT JOIN B
+ON A.id = B.id;
+
+결과:
+
+A의 모든 행
+
+B에 일치하는 값은 붙고
+
+일치하지 않으면 B의 값들은 NULL
+
+프로그래머스에서 자주 나오는 패턴
+
+“장바구니에는 있는데 구매 내역이 없는 상품 찾기”
+
+“부모는 있는데 자식이 없는 데이터 찾기”
+→ LEFT JOIN + WHERE B.id IS NULL
+
+3) RIGHT JOIN
+
+👉 LEFT JOIN 반대
+오른쪽은 모두 나오고, 왼쪽 매칭 없으면 NULL
+
+실무에서는 거의 안씀.
+
+4) FULL OUTER JOIN
+
+👉 A 전체 + B 전체 (일치 여부 상관 없음)
+
+MySQL에는 기본 지원 안 함
+→ LEFT JOIN + UNION + RIGHT JOIN 형태로 만들 수 있음.
+
+🧪 JOIN에서 ON과 WHERE 차이 (많이 틀리는 부분)
+
+예:
+
+SELECT *
+FROM A
+LEFT JOIN B
+ON A.id = B.id
+WHERE B.status = 'Y';
+
+
+여기서 WHERE는 LEFT JOIN을 INNER JOIN으로 바꿔버린다.
+B.status가 NULL인 행이 다 날라가니까.
+
+👉 LEFT JOIN 본질을 유지하려면 조건은 WHERE가 아닌 ON에 넣어야 한다.
+
+
+
+
+
+-------------------------------------------------------------
+🔥 JOIN 20문제 유형별 패턴 정리 (완전판)
+
+
+✅ 1. INNER JOIN 기본 패턴
+✔ 문제
+
+A 테이블과 B 테이블을 조인하여 공통 키(id)가 같은 데이터를 출력하시오.
+
+✔ SQL 패턴
+SELECT *
+FROM A a
+JOIN B b ON a.id = b.id;
+
+✅ 2. LEFT JOIN 기본 패턴
+✔ 문제
+
+A에는 있지만 B에는 없는 데이터를 출력하시오.
+
+✔ SQL 패턴
+SELECT *
+FROM A a
+LEFT JOIN B b ON a.id = b.id
+WHERE b.id IS NULL;
+
+✅ 3. RIGHT JOIN 기본 문제
+✔ 문제
+
+B에는 있지만 A에는 없는 데이터 찾기.
+
+SELECT *
+FROM A a
+RIGHT JOIN B b ON a.id = b.id
+WHERE a.id IS NULL;
+
+✅ 4. JOIN + GROUP BY 기본
+✔ 문제
+
+주문 테이블과 상품 테이블을 조인하여 상품별 주문 수를 구하시오.
+
+SELECT p.product_name, COUNT(o.order_id)
+FROM orders o
+JOIN products p ON o.product_id = p.product_id
+GROUP BY p.product_name;
+
+✅ 5. JOIN + HAVING
+✔ 문제
+
+물고기 종류별 잡은 수 중 2마리 이상인 종류만 출력.
+
+SELECT b.fish_name, COUNT(*) AS cnt
+FROM fish_info a
+JOIN fish_name_info b ON a.fish_type = b.fish_type
+GROUP BY b.fish_name
+HAVING COUNT(*) >= 2;
+
+✅ 6. 1:N 관계에서 최근 데이터 JOIN
+
+(프로그래머스 자주 출제)
+
+✔ 문제
+
+게시글 + 가장 최신 댓글 1개만 붙여 조회.
+
+SELECT *
+FROM board b
+JOIN reply r 
+  ON b.id = r.board_id
+  AND r.created_at = (
+      SELECT MAX(created_at)
+      FROM reply
+      WHERE board_id = b.id
+  );
+
+✅ 7. 조인 후 WHERE 필터링
+✔ 문제
+
+주문 + 고객 중 VIP 고객의 주문만 출력.
+
+SELECT *
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+WHERE c.grade = 'VIP';
+
+✅ 8. 여러 테이블 JOIN (3개 테이블)
+✔ 문제
+
+상품 + 카테고리 + 제조사 이름 붙이기.
+
+SELECT p.name, c.category_name, m.manufacturer_name
+FROM product p
+JOIN category c ON p.category_id = c.id
+JOIN manufacturer m ON p.manufacturer_id = m.id;
+
+✅ 9. SELF JOIN
+✔ 문제
+
+직원-관리자 구조에서 직원 이름과 관리자 이름 조회.
+
+SELECT e.name AS employee, m.name AS manager
+FROM employee e
+JOIN employee m ON e.manager_id = m.id;
+
+✅ 10. JOIN + ORDER BY
+✔ 문제
+
+식당 + 리뷰 합쳐서 리뷰 많은 순 정렬.
+
+SELECT r.rest_name, COUNT(rv.id) AS review_count
+FROM restaurant r
+JOIN review rv ON r.id = rv.rest_id
+GROUP BY r.rest_name
+ORDER BY review_count DESC;
+
+✅ 11. JOIN + DISTINCT
+✔ 문제
+
+한 번이라도 구매한 고객 목록.
+
+SELECT DISTINCT c.customer_id
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id;
+
+✅ 12. JOIN + 집계 후 정렬
+✔ 문제
+
+물고기 종류별 길이 평균이 가장 긴 순.
+
+SELECT b.fish_name, AVG(a.length) AS avg_len
+FROM fish_info a
+JOIN fish_name_info b ON a.fish_type = b.fish_type
+GROUP BY b.fish_name
+ORDER BY avg_len DESC;
+
+✅ 13. JOIN + REGEXP (패턴 필터링)
+✔ 문제
+
+카테고리 이름에 ‘식당’이 포함된 가게 목록.
+
+SELECT *
+FROM store s
+JOIN category c ON s.cat_id = c.id
+WHERE c.category_name REGEXP '식당';
+
+✅ 14. JOIN + 날짜 조건
+✔ 문제
+
+최근 한 달 동안의 주문 + 고객 정보를 JOIN.
+
+SELECT *
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+WHERE o.order_date >= DATE_SUB(NOW(), INTERVAL 1 MONTH);
+
+✅ 15. FULL OUTER JOIN (MySQL 미지원 → 대체 구현)
+✔ 문제
+
+A와 B의 모든 ID 조회.
+
+SELECT *
+FROM A a
+LEFT JOIN B b ON a.id = b.id
+
+UNION
+
+SELECT *
+FROM A a
+RIGHT JOIN B b ON a.id = b.id;
+
+✅ 16. JOIN + SUBQUERY IN
+✔ 문제
+
+2023년에 주문한 고객 정보.
+
+SELECT *
+FROM customers c
+JOIN (
+    SELECT DISTINCT customer_id
+    FROM orders
+    WHERE YEAR(order_date) = 2023
+) o ON c.customer_id = o.customer_id;
+
+✅ 17. JOIN + CASE WHEN
+✔ 문제
+
+고객 소득 등급 붙이기.
+
+SELECT c.name,
+       CASE
+         WHEN c.income >= 5000 THEN '고소득'
+         WHEN c.income >= 3000 THEN '중소득'
+         ELSE '저소득'
+       END AS level
+FROM customers c;
+
+
+(JOIN 없지만 JOIN과 함께 많이 나오는 패턴)
+
+✅ 18. JOIN + COUNT(DISTINCT)
+✔ 문제
+
+상품별로 구매한 고유 고객 수.
+
+SELECT p.name, COUNT(DISTINCT o.customer_id) AS unique_buyers
+FROM orders o
+JOIN product p ON o.product_id = p.product_id
+GROUP BY p.name;
+
+✅ 19. JOIN + MAX/MIN
+✔ 문제
+
+식당별 가장 비싼 메뉴 가격.
+
+SELECT r.rest_name, MAX(m.price)
+FROM restaurant r
+JOIN menu m ON r.id = m.rest_id
+GROUP BY r.rest_name;
+
+✅ 20. JOIN + 윈도우 함수 (고급)
+✔ 문제
+
+각 게시글에 댓글 순위 붙이기.
+
+SELECT b.id, b.title, r.reply_id,
+       RANK() OVER(PARTITION BY b.id ORDER BY r.created_at) AS reply_rank
+FROM board b
+JOIN reply r ON b.id = r.board_id;
+
+🎯 마지막 요약: JOIN 유형별 문제를 구분하는 기준
+유형	          사용 키워드	          문제 힌트
+INNER	          JOIN	                둘 다 있는 것
+LEFT	          LEFT JOIN + IS NULL	  한쪽에는 있는데 한쪽에는 없음
+GROUP	          GROUP BY	            종류별 집계
+HAVING	        HAVING	              집계 후 필터
+MAX / SUBQUERY	MAX(),                최신 데이터	“가장 ~한”
+DISTINCT	      DISTINCT	            중복 제거
+3테이블	        JOIN JOIN	            관계도 확장
