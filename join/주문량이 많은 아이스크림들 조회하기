@@ -1,0 +1,15 @@
+-- 7월은 주문량이 많아서 공장이 여러 곳에서 맛 별로 나옴. 근데 기존의 상반기 주문량이랑 더하고 싶은거임
+-- 7월을 먼저 더한 결과 값을 기준으로 조인하고, 
+-- ~~더한 값이 큰 순서대로니깐 메인 order by에서 더한다.
+
+select b.flavor
+from FIRST_HALF b
+join (
+    select flavor, sum(total_order) as total_order
+    from july 
+    group by flavor
+) a
+on b.flavor = a.flavor
+order by (b.total_order + a.total_order) desc
+limit 3
+;
