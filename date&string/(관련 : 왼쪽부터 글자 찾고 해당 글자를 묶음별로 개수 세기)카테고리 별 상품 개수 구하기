@@ -1,3 +1,6 @@
+★ 패턴) 왼쪽부터 글자 찾고 해당 글자를 묶음별로 개수 세기
+
+
 ★ 정답 1) cte + left + count 
 
 with cte_name as (
