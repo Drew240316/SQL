@@ -30,7 +30,6 @@ SELECT COUNT(*) AS FISH_COUNT
 FROM fish_info
 WHERE LEFT(time, 4) = '2021';
 
-
 ★ 정답) substirng + count 
 SELECT COUNT(*) AS FISH_COUNT
 FROM fish_info
