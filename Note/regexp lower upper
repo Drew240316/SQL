@@ -1,0 +1,10 @@
+REGEXP 'apple'
+'apple', 'Apple', 'APPLE' 모두 매칭됨.
+
+
+LOWER('APPLE')
+소문자 변경
+
+
+UPPER('apple')
+대문자 변경
