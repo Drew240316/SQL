@@ -1,0 +1,21 @@
+select a.animal_id, a.name 
+from animal_ins a join animal_outs b on a.animal_id = b.animal_id 
+order by datediff(b.DATETIME,a.DATETIME)+1 DESC
+limit 2
+;
+
+
+TIP) order by에 쓸 수 있는 것?
+
+  컬럼명
+  alias
+  컬럼번호
+  문자열 함수 / 날짜 함수 / 수학 함수  <- 해당 문제에서 쓴 것
+  조건식(case when) = 정렬 기준 조작할 때..
+  nulls first / nulls last
+  집계 결과
+  
+  
+
+TIP) order by에 쓸 수 없는 것
+ where절에서 만든 조건은 재사용 불가(별명인 alias가 없는 상태라...)
