@@ -1,0 +1,10 @@
+with cte_name as (
+    select product_id, left(product_code,2) as test
+    from product
+    )
+select test as category , count(product_id) as products
+from cte_name
+group by test
+
+
+tip) cte명 옆에 as 꼭 빼먹지 말자!
