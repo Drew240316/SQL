@@ -1,15 +1,14 @@
-select b.flavor
-from FIRST_HALF b
+select f.flavor
+from first_half f
 join (
-    select flavor, sum(total_order) as total_order
-    from july 
-    group by flavor
-) a
-on b.flavor = a.flavor
-order by (b.total_order + a.total_order) desc
+      select flavor, sum(total_order) as total_order
+      from july 
+      group by flavor
+    ) j
+on f.flavor = j.flavor
+order by (j.total_order + f.total_order) desc
 limit 3
 ;
-
 
 - first_half의 기본키는 falvor (1개씩) ,  shipment_id는 july의 외래키
 - july의 기본키는 shipment_id (1개식) , flavor은 first_half의 외래키
