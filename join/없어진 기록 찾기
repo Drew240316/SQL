@@ -1,0 +1,7 @@
+select o.animal_id, o.name
+from animal_outs o left join animal_ins i on o.animal_id = i.animal_id
+where i.name is null and i.animal_id is null
+
+
+-- Since there is an adoption date but no protection date, you need to find something that is null for both id and name.
+-- If only i.name is lost, i.animal_id가 남아있을 수도 있다 둘다 null인 것을 조건을 걸자.
