@@ -1,0 +1,10 @@
+select o.animal_id, o.name
+from animal_outs o join animal_ins i on o.animal_id = i.animal_id
+where o.datetime < i.datetime
+order by i.datetime asc
+
+;
+
+
+-- 조건 기준이되는 컬럼의 날짜가 작아야 입양일이 더 앞의 날짜인 것을 알 수 있다. 
+-- 헷깔리면  o.datetime, i.datetime을 select절에서 추가해서 눈으로 확인해보자 어느 날짜가 더 빠른가?
