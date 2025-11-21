@@ -1,7 +1,3 @@
--- 7월은 주문량이 많아서 공장이 여러 곳에서 맛 별로 나옴. 근데 기존의 상반기 주문량이랑 더하고 싶은거임
--- 7월을 먼저 더한 결과 값을 기준으로 조인하고, 
--- ~~더한 값이 큰 순서대로니깐 메인 order by에서 더한다.
-
 select b.flavor
 from FIRST_HALF b
 join (
@@ -13,3 +9,11 @@ on b.flavor = a.flavor
 order by (b.total_order + a.total_order) desc
 limit 3
 ;
+
+
+- first_half의 기본키는 falvor (1개씩) ,  shipment_id는 july의 외래키
+- july의 기본키는 shipment_id (1개식) , flavor은 first_half의 외래키
+- july는 같은 flavor이더라도 다른 shipment_id를 가짐 (=7월은 같은 맛이더라도 다른 공장에서 출하됨)
+- july는 flavor로 total_order를 구해야 (오렌지 오렌지 스트로베리 포도처럼 각각의 맛들을 그룹화해서 합할 수 있음)
+- july의 total_order를 sum하면, 이제 first_half와 동등한 조건으로 sum할 수 있음
+- order by절은 expression할 수 있는 연산식,함수, alias가 가능하기에 두 테이블의 total_order를 더할 수 있음.
